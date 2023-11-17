@@ -1,7 +1,7 @@
 # Property-Price-Prediction
-比賽期間: 2023-09-04 ~ 2023-11-13
-
-### 因應比賽規章，資料集不可commit上git，請自行於比賽期間內至官網報名參賽後下載資料集。
+![](/img/period.png)
+![](/img/dtformat.png)
+![](/img/rules.png)
 
 ## 安裝
   ```shell
