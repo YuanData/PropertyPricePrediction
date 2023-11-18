@@ -64,8 +64,9 @@ def gen_label_by_group_mean(df: pd.DataFrame):
         df[f'{col}_mean_label'] = df.groupby(col)['UnitPrice'].transform('mean')
 
 
-def extract(df: pd.DataFrame):
-    df['Lon'], df['Lat'] = zip(*[geo_transform(row, col) for row, col in zip(df['X'], df['Y'])])
+def extract(df: pd.DataFrame) -> pd.DataFrame:
+    df['Lon'], df['Lat'] = zip(*df.apply(lambda row: geo_transform(row['X'], row['Y']), axis=1))
     normalize_data(df)
     categorize_data(df)
     gen_label_by_group_mean(df)
+    return df

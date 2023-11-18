@@ -1,10 +1,18 @@
 import pandas as pd
 
+from mine import extract
+from measure_utilities import measure_utilities
 from model_fitting import train_models
-from preprocessing import preprocessing
 from price_prediction import predict_property_prices
 
-if __name__ == '__main__':
+
+def preprocessing(df: pd.DataFrame) -> pd.DataFrame:
+    df = extract(df)
+    df = measure_utilities(df)
+    return df
+
+
+def main():
     df_train = pd.read_csv("input/training_data.csv")
     df_train = preprocessing(df_train)
 
@@ -14,3 +22,7 @@ if __name__ == '__main__':
     df_test = preprocessing(df_test)
 
     predict_property_prices(df_test)
+
+
+if __name__ == '__main__':
+    main()

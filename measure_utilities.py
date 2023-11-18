@@ -9,11 +9,9 @@ def measure_spherical_distance(point_a, point_b):
     lat_a, lon_a = np.radians(point_a)
     lat_b, lon_b = np.radians(point_b)
     # Haversine formula
-    d_lon = lon_b - lon_a
-    d_lat = lat_b - lat_a
-    a = np.sin(d_lat / 2) ** 2 + np.cos(lat_a) * np.cos(lat_b) * np.sin(d_lon / 2) ** 2
-    c = 2 * np.arcsin(np.sqrt(a))
-    distance_km = c * 6371  # Radius of earth in kilometers
+    d_lon, d_lat = lon_b - lon_a, lat_b - lat_a
+    distance_km = 2 * np.arcsin(
+        np.sqrt(np.sin(d_lat / 2) ** 2 + np.cos(lat_a) * np.cos(lat_b) * np.sin(d_lon / 2) ** 2)) * 6371
     return np.round(distance_km, 2)
 
 
@@ -46,7 +44,7 @@ def process_facility(df: pd.DataFrame, facility: str):
     df[f'has_{facility}'] = df[f'num_{facility}'].apply(lambda x: x > 0)
 
 
-def measure_utilities(df: pd.DataFrame):
+def measure_utilities(df: pd.DataFrame) -> pd.DataFrame:
     facilities = [
         'ATM',
         'ConvenienceStore',
@@ -64,3 +62,4 @@ def measure_utilities(df: pd.DataFrame):
     ]
     for facility in facilities:
         process_facility(df, facility)
+    return df

@@ -74,10 +74,10 @@ def train_and_evaluate(model, train_x, train_y, kf, scorer):
 
 def train_models(df: pd.DataFrame):
     used_cols = [
-        'CountyCity_label', 'CountyCity鄉鎮市區_label', 'Lon_transformed', 'Lat_transformed',
-        'LandArea_transformed', 'TotalBuildingArea_transformed', 'TransactionFloor_category', 'TotalFloors_category',
-        'BuildingAge_category', 'MainUsage_label', 'MainMaterial_label', 'ConstructionType_label', 'has_parking',
-        '車位面積_transformed',
+        'CountyCity', 'Lon', 'Lat', 'LandArea', 'TotalBuildingArea',
+        'TransactionFloor', 'TotalFloors', 'BuildingAge', 'MainUsage',
+        'MainMaterial', 'ConstructionType', 'has_ConvenienceStore',
+        'has_MetroStation', 'has_University', 'has_MedicalInstitution',
     ]
     target_col = 'UnitPrice'
     train_x, train_y = extract_features_and_target(df, used_cols, target_col)
